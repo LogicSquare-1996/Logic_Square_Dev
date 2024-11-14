@@ -7,11 +7,15 @@ const users = require("./users")
 const login = require("./auth")
 const signup = require("./auth/signup")
 const forgotpassword = require("./auth/password")
+const scrappingRoutes = require("./scrapping.js");
 
 router.post("/login", login.post) // UNAUTHENTICATED
 router.post("/signup", signup.post) // UNAUTHENTICATED
 router.post("/forgotpassword", forgotpassword.startWorkflow) // UNAUTHENTICATED; AJAX
 router.post("/resetpassword", forgotpassword.resetPassword) // UNAUTHENTICATED; AJAX
+
+// Scrapping Routes
+router.get("/scrapping", scrappingRoutes.getScrapData);
 
 router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
 
