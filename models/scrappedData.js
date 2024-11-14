@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const ScrappingSchema = new mongoose.Schema(
   {
+    url: {
+      type: String,
+    },
     platform: {
       type: String,
     },
@@ -11,10 +14,7 @@ const ScrappingSchema = new mongoose.Schema(
     category: {
       type: String,
     },
-    url: {
-      type: String,
-    },
-    dateOfScrap: {
+    dateOfData: {
       type: String,
     },
     rank: {
@@ -32,15 +32,18 @@ const ScrappingSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    categoryLinks: [
+    categories: [
       {
-        type: String,
-      },
-    ],
-    networkText: {
-      type: String,
-      default: "",
-    },
+          categoryText: String,
+          categoryLink: String
+      }
+  ],
+  networks: [
+      {
+          networkText: String,
+          networkLink: String
+      }
+  ],
     createdBy: {
       type: String,
     },

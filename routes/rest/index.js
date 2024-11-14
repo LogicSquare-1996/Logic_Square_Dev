@@ -15,9 +15,10 @@ router.post("/forgotpassword", forgotpassword.startWorkflow) // UNAUTHENTICATED;
 router.post("/resetpassword", forgotpassword.resetPassword) // UNAUTHENTICATED; AJAX
 
 // Scrapping Routes
-router.post("/scrapping", scrappingRoutes.getScrapData);
+// Assuming "country" is correct in place of "region"
+router.post("/charts/:platform/:country/:category", scrappingRoutes.getScrapData);
 
-router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
+// router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
 
 router.get("/user/:id", users.get)
 
