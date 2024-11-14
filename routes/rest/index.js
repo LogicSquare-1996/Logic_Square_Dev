@@ -15,7 +15,7 @@ router.post("/forgotpassword", forgotpassword.startWorkflow) // UNAUTHENTICATED;
 router.post("/resetpassword", forgotpassword.resetPassword) // UNAUTHENTICATED; AJAX
 
 // Scrapping Routes
-router.get("/scrapping", scrappingRoutes.getScrapData);
+router.post("/scrapping", scrappingRoutes.getScrapData);
 
 router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
 
