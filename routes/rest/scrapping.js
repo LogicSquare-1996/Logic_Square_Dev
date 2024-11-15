@@ -34,12 +34,6 @@ module.exports = {
       const scrappingDate = $("._u3fo9b").first().text().trim();
 
       const podcastData = [];
-
-      // Calculate the previous date
-      const previousDate = new Date(scrappingDate);
-      previousDate.setDate(previousDate.getDate() - 1);
-      const previousDateString = previousDate.toISOString().split("T")[0];
-
       $("tbody tr").each((i, row) => {
         const rank = $(row).find("._sn01r5").text().trim();
         const titleLink = $(row).find("._1x1973c").attr("href");
@@ -66,7 +60,6 @@ module.exports = {
           category,
           scrappingDate,
           rank,
-          prevDayRank: "0", // Default value, will be updated below
           imageLink,
           title,
           titleLink,
@@ -77,23 +70,16 @@ module.exports = {
         });
       });
 
-      // Update the `prevDayRank` for each podcast
+      // Save all podcast data
       for (const podcast of podcastData) {
-        const previousDayRecord = await ChartsData.findOne({
-          scrappingDate: previousDateString,
-          titleLink: podcast.titleLink,
-        });
-
-        if (previousDayRecord) {
-          podcast.prevDayRank = previousDayRecord.rank;
-        }
+        const podcastDoc = new ChartsData(podcast);
+        await podcastDoc.save(); // Triggers the pre-save hook
       }
 
-      // Save the podcasts to the database
-      await ChartsData.insertMany(podcastData);
+      // Fetch and send all saved data including prevDayRank
+      const responseData = await ChartsData.find({ scrappingDate });
 
-      // Send the response with the updated podcast data
-      return res.status(200).json({ error: false, scrappingDate, podcasts: podcastData });
+      return res.status(200).json({ error: false, scrappingDate, podcasts: responseData });
     } catch (error) {
       return res.status(500).json({ error: true, reason: error.message });
     }
