@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-const ScrappingSchema = new mongoose.Schema(
-  {
+const ChartsSchema = new mongoose.Schema({
     url: {
       type: String,
     },
@@ -14,10 +13,13 @@ const ScrappingSchema = new mongoose.Schema(
     category: {
       type: String,
     },
-    dateOfData: {
+    scarappingDate: {
       type: String,
     },
     rank: {
+      type: String,
+    },
+    prevDayRank: {
       type: String,
     },
     imageLink: {
@@ -26,7 +28,7 @@ const ScrappingSchema = new mongoose.Schema(
     title: {
       type: String,
     },
-    link: {
+    titleLink: {
       type: String,
     },
     description: {
@@ -47,8 +49,42 @@ const ScrappingSchema = new mongoose.Schema(
     createdBy: {
       type: String,
     },
-  },
-  { timestamps: true }
+  }
 );
 
-module.exports = mongoose.model("ScrappingData", ScrappingSchema);
+
+ChartsSchema.pre('save', async function (next) {
+    const scrapping = this;
+  
+    if (!scrapping.scrappingDate || !scrapping.titleLink) {
+      return next(); // Skip if no scrappingDate or titleLink
+    }
+  
+    try {
+      // Calculate the previous day's date
+      const currentDate = new Date(scrapping.scrappingDate);
+      const previousDate = new Date(currentDate);
+      previousDate.setDate(currentDate.getDate() - 1);
+      const previousDateString = previousDate.toISOString().split('T')[0];
+  
+      // Find the record for the previous day using titleLink as a unique identifier
+      const previousDayRecord = await mongoose
+        .model('ChartsData')
+        .findOne({ scrappingDate: previousDateString, titleLink: scrapping.titleLink });
+  
+      // Update prevDayRank if a previous day record is found
+      scrapping.prevDayRank = previousDayRecord ? previousDayRecord.rank : "0";
+  
+      next();
+    } catch (err) {
+      next(err); // Pass error to next middleware
+    }
+  });
+  
+
+
+  ChartsSchema.set("timestamps", true)
+  ChartsSchema.set("toJSON", { virtuals: true })
+  ChartsSchema.set("toObject", { virtuals: true })
+
+module.exports = mongoose.model("ChartsData", ChartsSchema);
