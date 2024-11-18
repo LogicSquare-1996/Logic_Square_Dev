@@ -8,6 +8,7 @@ const login = require("./auth")
 const signup = require("./auth/signup")
 const forgotpassword = require("./auth/password")
 const scrappingRoutes = require("./scrapping.js");
+const googleSheetRoutes = require("./googleSheet.js");
 
 router.post("/login", login.post) // UNAUTHENTICATED
 router.post("/signup", signup.post) // UNAUTHENTICATED
@@ -17,6 +18,14 @@ router.post("/resetpassword", forgotpassword.resetPassword) // UNAUTHENTICATED; 
 // Scrapping Routes
 // Assuming "country" is correct in place of "region"
 router.post("/charts/:platform/:country/:category", scrappingRoutes.getScrapData);
+
+router.get("/googleSheet/readdata", googleSheetRoutes.readGoogleSheetData);
+router.post("/googleSheet/writedata", googleSheetRoutes.writeGoogleSheetData);
+router.post("/googleSheet/updatedata", googleSheetRoutes.updateGoogleSheetData);
+router.post("/googleSheet/updatecelldata", googleSheetRoutes.updateSpecificCell);
+router.post("/googleSheet/deletedata", googleSheetRoutes.deleteGoogleSheetData);
+router.post("/googleSheet/deletecelldata", googleSheetRoutes.deleteGoogleSheetCell);
+
 
 // router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
 
