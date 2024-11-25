@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const expressJwt = require("express-jwt")
+const multer = require("multer");
 const checkJwt = expressJwt({ secret: process.env.SECRET, algorithms: ['RS256'] }) // the JWT auth check middleware
 
 const users = require("./users")
@@ -9,6 +10,10 @@ const signup = require("./auth/signup")
 const forgotpassword = require("./auth/password")
 const scrappingRoutes = require("./scrapping.js");
 const googleSheetRoutes = require("./googleSheet.js");
+const instagramRoutes = require("./instagram.js");
+const praseRoutes = require("./parseResume.js")
+
+const upload = multer();
 
 router.post("/login", login.post) // UNAUTHENTICATED
 router.post("/signup", signup.post) // UNAUTHENTICATED
@@ -25,6 +30,12 @@ router.post("/googleSheet/updatedata", googleSheetRoutes.updateGoogleSheetData);
 router.post("/googleSheet/updatecelldata", googleSheetRoutes.updateSpecificCell);
 router.post("/googleSheet/deletedata", googleSheetRoutes.deleteGoogleSheetData);
 router.post("/googleSheet/deletecelldata", googleSheetRoutes.deleteGoogleSheetCell);
+
+//Extract Followers List
+router.post("/extractfollowers",upload.array('files', 2), instagramRoutes.extractFollowers);
+
+//Parse Resume Data using Gemini
+router.post("/parseResume", upload.single("resume"),praseRoutes.parseResume);
 
 
 // router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
