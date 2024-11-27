@@ -1,4 +1,7 @@
 const pdfParse = require("pdf-parse");
+const mammoth = require("mammoth");
+const xlsx = require("xlsx");
+const Tesseract = require("tesseract.js");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 module.exports = {
@@ -10,10 +13,35 @@ module.exports = {
             }
     
             // Extract text from PDF
-            const pdfBuffer = req.file.buffer;
-            const pdfData = await pdfParse(pdfBuffer);
-            const extractedText = pdfData.text;
-    
+            const fileBuffer = req.file.buffer;
+            const fileMime = req.file.mimetype;
+            let extractedText = "";
+
+            // Determine file type and extract text accordingly
+            if (fileMime === "application/pdf") {
+                const pdfData = await pdfParse(fileBuffer);
+                extractedText = pdfData.text;
+            } else if (fileMime === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+                const result = await mammoth.extractRawText({ buffer: fileBuffer });
+                extractedText = result.value;
+            } else if (fileMime === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+                const workbook = xlsx.read(fileBuffer, { type: "buffer" });
+                const sheetNames = workbook.SheetNames;
+                const firstSheet = workbook.Sheets[sheetNames[0]];
+                extractedText = xlsx.utils.sheet_to_csv(firstSheet); // Convert the first sheet to CSV
+            } else if (["image/png", "image/jpeg"].includes(fileMime)) {
+                const ocrResult = await Tesseract.recognize(fileBuffer, "eng");
+                extractedText = ocrResult.data.text;
+            } else {
+                return res.status(400).json({ error: "Unsupported file format" });
+            }
+
+            if (!extractedText.trim()) {
+                return res.status(400).json({ error: "Failed to extract text from file" });
+            }
+
+            
+            
             // Initialize Google Generative AI
             const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
             const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
