@@ -12,6 +12,7 @@ const scrappingRoutes = require("./scrapping.js");
 const googleSheetRoutes = require("./googleSheet.js");
 const instagramRoutes = require("./instagram.js");
 const praseRoutes = require("./parseResume.js")
+const redisRoutes = require("./redis.js");
 
 const upload = multer();
 
@@ -37,6 +38,12 @@ router.post("/extractfollowers",upload.array('files', 2), instagramRoutes.extrac
 //Parse Resume Data using Gemini
 router.post("/parseResume", upload.single("resume"),praseRoutes.parseResume);
 
+// Redis Routes
+router.post("/redis/store", redisRoutes.storeData);
+router.get("/redis/get/:key", redisRoutes.getData);
+router.delete("/redis/delete/:key", redisRoutes.deleteData);
+router.get("/redis/ttl/:key", redisRoutes.getTTL);
+router.get("/redis/keys", redisRoutes.listKeys);
 
 // router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
 
