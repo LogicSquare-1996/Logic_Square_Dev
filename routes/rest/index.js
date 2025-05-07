@@ -13,6 +13,7 @@ const googleSheetRoutes = require("./googleSheet.js");
 const instagramRoutes = require("./instagram.js");
 const praseRoutes = require("./parseResume.js")
 const redisRoutes = require("./redis.js");
+const spreadSheetRoutes = require("./spreadsheet.js");
 
 const upload = multer();
 
@@ -44,6 +45,10 @@ router.get("/redis/get/:key", redisRoutes.getData);
 router.delete("/redis/delete/:key", redisRoutes.deleteData);
 router.get("/redis/ttl/:key", redisRoutes.getTTL);
 router.get("/redis/keys", redisRoutes.listKeys);
+
+router.post("/addmarksheet", spreadSheetRoutes.addMarksheet);
+router.post("/addmarkstodb", spreadSheetRoutes.addMarksheetToDB);
+
 
 // router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
 

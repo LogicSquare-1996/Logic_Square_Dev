@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "astute-psyche-267221",
+  "private_key_id": "99a2e7e4b20db99e6d47c6fdf3c4959a3e61f46a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC4w0spIIiXhnMH\nYrfkkjZnz/zjeoohHe3HRp4UEV9HMUqzGyCPyr9EozEyLdvE2Iwm8WOUuZynxU51\nJqcxf5jQZ24qIAIePX6gOGgumi81UrOji9nu8ClqurCSg+8k5JAedId0zhPmK5lv\n9Qmmj+FnfWrOukpjLv73ISch8yPVdhr+KWyOERuw9ULwuVY32WyVP34KereYusrb\n9MLo7ChzAViez+PJIUPzICY/kieh3ll0lhy1HWbH/b56g4gK41r2XaaAsG9tfvA1\n5HJ5PnRqG76GY6T5KbEUdmmSjWMpccIkZzDF6mB/J9Ben+nuSBeiX8drX+bFtPnG\nwIpG8Qf7AgMBAAECggEAS5GtCyxAUeFu6OVqm3VmBT3fjFcRagwotenfPAwC8UZq\n7Ci7P7TIWFV7CLATBEchw8fVV/424bPkrCvcFHXA1fSH7XjcBOxX/0Yy7mSnzGKA\nEPNhdsYJ2ppzH+oQhQFrJNm6kX68StcoUc9iXBrbMY3tgpJVXI3bQM7xh4Q/8s1A\n0vK8Jkdk8sI3HRBnx80VfzkZ3sr3i5Pyc9GKskHAgg1stApdSi4lMrSIXDH6Txe7\nUYSoK8yFyNwt6lFhWvVQ0nRuwuvMW2IVBR1uoLFKNEkbyy6W3xiviMp3zXESNQWm\nCPVeSzsQ7vyH15FZculHT1dlDL9qaOAEYUodUTY1gQKBgQD8CMKjNcGBcwJFrSRm\nbXSpLgYfhiYQzBZ4AM+9RJ1N7lrAh+glDeg9WpaxVKDtAhkA3Crg/YxD58qEURBH\n5nd5uu5vRhRh48ARl7acc48tBmB6q0dqUc528Lgp0Uy4DLeyLJKYFSG+JGpEJVsL\ngRixRlyX0ZZNYESgr/QmNPtqwQKBgQC7q41SWJyCmmfUsOQwF4PMp5kXsRXuM/Q7\nZwBmkkNPMDwjMm3UjvipYBFSJaoyizLlO6fQldGMagrNYKFCGz8ecXfu6NVOIrh5\n+5tag7aa5K3E/pFE+xRzwzUFvJpNhE/8IrLXvKk7ENWlKybQO2a2xySKvUg3uI/c\nsQFBpa5NuwKBgQDfJzaG4fLaliU94ibnliSEIx8CzHlpx/pg+H73WwhY1yF9dRhD\nrsOhh1MD4iW2lHPlAgvpODX4bgQvEcNzlgjVPIEe/xLO9aO7L/RdJChyOkI0evD5\nn0NKpqq5Q/tEvuXrGXIWvCcrPvzkJ5ssXXqqg906AzWsfv9ks0ZeiezOQQKBgQCO\nkxVJUxKMUjvBpSWmt6aky0sOabWsgwHwQx9VzZafSZjWcJBqJLgbDWX7T6wOvBvN\ndVXXrIpHL6THRLseGs8IFNI1yeOLeetGmPT8fgYzhLnTaEb67fkqvUnB8vgTHgsa\nFU5jgevbeL2mvrK9DfPJtl83m/eKhYed9UdsFS/n0wKBgGECXiceqpsouYgkIGvi\noKAQz0VhfF9SwQOPBqbnIFx1/HjIqMFF/3QPY4UaW+DTNihBs/6PsChpTTDJShIs\nEAAVfIZPteLUzmvHb1ctok0GVw5Xu5E9H+OHCQ5PqT/qBp/a5okE/4mXtjgHqzjU\nEbJevSDI0bV7qyh2HwCdM0CU\n-----END PRIVATE KEY-----\n",
+  "client_email": "mrinalbera@astute-psyche-267221.iam.gserviceaccount.com",
+  "client_id": "106941208272382482128",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mrinalbera%40astute-psyche-267221.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
